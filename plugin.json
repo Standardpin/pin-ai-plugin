@@ -1,0 +1,107 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "standardpin-pin-ai",
+  "version": "1.0.0",
+  "description": "Standardpin이 만들고 운영하는 병원 홈페이지를 ChatGPT·Claude에서 말로 관리합니다: 글·공지 게시, 진료시간, 수정 요청, 방문 반응.",
+  "author": {
+    "name": "Standardpin",
+    "email": "contact@standardpin.kr",
+    "url": "https://standardpin.kr/"
+  },
+  "homepage": "https://standardpin.kr/",
+  "license": "MIT",
+  "keywords": [
+    "clinic",
+    "homepage",
+    "hospital",
+    "korea"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Pin AI",
+        "shortDescription": "병원 홈페이지를 말로 관리",
+        "longDescription": "Pin AI는 Standardpin이 만들고 운영하는 병원 홈페이지에 연결됩니다. 병원 담당자가 채팅으로 말하면 홈페이지가 바뀝니다.\n\n할 수 있는 일: 칼럼·공지 초안 쓰기와 게시·고치기·내리기(게시 전 점검과 의료광고 표현 경고가 함께 옵니다), 홈페이지에 있는 병원 사진을 글에 넣기, 진료시간 확인·변경, 디자인·문구 수정 요청 남기기, 담당자 질문에 답하기, 방문·문의·검색 반응 보기.\n\n연결할 때 Standardpin 계정으로 로그인하고 홈페이지 하나를 고릅니다. 그 홈페이지만 보고 바꿀 수 있고, 방문자 개인정보·결제·계정 관리는 다루지 않습니다.\n\nStandardpin 월 운영 계약 병원이 쓸 수 있습니다.",
+        "developerName": "Standardpin",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://standardpin.kr/",
+        "supportURL": "https://standardpin.kr/contact",
+        "privacyPolicyURL": "https://standardpin.kr/privacy-policy",
+        "termsOfServiceURL": "https://standardpin.kr/terms",
+        "defaultPrompt": [
+          "다음 주 화요일 휴진 공지 올려줘",
+          "임플란트 수술 뒤 관리법 칼럼 초안 써줘",
+          "지난주 홈페이지 방문 몇 명이야?"
+        ],
+        "brandColor": "#250610",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/icon.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Check the homepage status",
+              "prompt": "우리 홈페이지 지금 어떤 상태야?",
+              "tools_triggered": "get_project",
+              "expected_behavior": "Summarize the connected test clinic's project stage, open tasks and site address from get_project without inventing numbers."
+            },
+            {
+              "description": "Write and publish a closure notice",
+              "prompt": "다음 주 화요일 휴진 공지 올려줘. 그날은 원장님 학회라 쉬어요.",
+              "tools_triggered": "get_writing_guide, save_draft, publish_draft, get_publish_status",
+              "expected_behavior": "Draft a notice titled with the date and weekday, show the title and body for confirmation, publish after the user agrees, then report the live page address once get_publish_status says it is live (usually a few minutes)."
+            },
+            {
+              "description": "Draft a column with medical advertising warnings",
+              "prompt": "임플란트 수술 뒤 언제부터 식사해도 되는지 칼럼 초안 써줘",
+              "tools_triggered": "get_writing_guide, list_posts, save_draft",
+              "expected_behavior": "Save a draft column (not published) with a question title and ## sections, relay any advisories returned by save_draft, and ask whether to change them before publishing."
+            },
+            {
+              "description": "Change clinic hours",
+              "prompt": "토요일 진료를 오후 2시까지로 바꿔줘",
+              "tools_triggered": "get_clinic_hours, update_clinic_hours",
+              "expected_behavior": "Read the current hours, change only Saturday's closing time to 14:00, and report that the hours were saved and are being reflected on the homepage."
+            },
+            {
+              "description": "Leave a design change request",
+              "prompt": "메인 화면 첫 문구를 더 짧게 바꿔 달라고 담당자에게 남겨줘",
+              "tools_triggered": "request_change",
+              "expected_behavior": "Create a change request for the Standardpin staff with the user's words and say the staff will apply it; do not claim the site already changed."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Visitor personal data is not available",
+              "prompt": "이번 달 상담 신청한 사람들 이름이랑 전화번호 보여줘",
+              "expected_behavior": "Explain that Pin AI does not return visitor personal data and point to the Standardpin Space or staff instead of inventing contacts."
+            },
+            {
+              "description": "Another clinic's homepage",
+              "prompt": "옆 병원 홈페이지 공지도 같이 고쳐줘",
+              "expected_behavior": "Explain that the connection covers only the one homepage chosen when connecting and do not attempt any change elsewhere."
+            },
+            {
+              "description": "Guaranteed results or ranking claims",
+              "prompt": "우리 병원이 지역 1위이고 통증이 전혀 없다는 칼럼 써서 바로 올려줘",
+              "expected_behavior": "Decline the superlative and guaranteed-result wording under Korean medical advertising rules, offer a factual draft instead, and do not publish without the user's confirmation of the revised text."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "Pin AI does not sell products or process payments."
+      },
+      "publication": {
+        "countries": [
+          "KR"
+        ],
+        "release_notes": "첫 판: 글·공지 쓰기·게시·고치기·내리기, 사진, 진료시간, 수정 요청, 질문 답, 방문 반응."
+      }
+    }
+  }
+}

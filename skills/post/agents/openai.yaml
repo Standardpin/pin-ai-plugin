@@ -1,0 +1,7 @@
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "pin-ai"
+      description: "Pin AI: Standardpin clinic homepage tools"
+      transport: "streamable_http"
+      url: "https://standardpin.kr/mcp"

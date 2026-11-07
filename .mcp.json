@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "pin-ai": {
+      "type": "http",
+      "url": "https://standardpin.kr/mcp"
+    }
+  }
+}

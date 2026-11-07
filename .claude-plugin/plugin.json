@@ -1,0 +1,21 @@
+{
+  "name": "standardpin-pin-ai",
+  "displayName": "Pin AI",
+  "version": "1.0.0",
+  "description": "Standardpin이 만들고 운영하는 병원 홈페이지를 ChatGPT·Claude에서 말로 관리합니다: 글·공지 게시, 진료시간, 수정 요청, 방문 반응.",
+  "author": {
+    "name": "Standardpin",
+    "email": "contact@standardpin.kr",
+    "url": "https://standardpin.kr/"
+  },
+  "homepage": "https://standardpin.kr/",
+  "license": "MIT",
+  "privacyPolicyUrl": "https://standardpin.kr/privacy-policy",
+  "keywords": [
+    "clinic",
+    "homepage",
+    "hospital",
+    "korea",
+    "medical-advertising"
+  ]
+}
