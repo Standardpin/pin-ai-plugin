@@ -93,6 +93,7 @@
             }
           ]
         },
+        "demo_recording_url": "https://github.com/Standardpin/pin-ai-plugin/releases/download/demo/pin-ai-chatgpt-demo.mp4",
         "commerce": false,
         "commerce_description": "Pin AI does not sell products or process payments."
       },
