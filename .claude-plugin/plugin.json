@@ -11,6 +11,10 @@
   "homepage": "https://standardpin.kr/",
   "license": "MIT",
   "privacyPolicyUrl": "https://standardpin.kr/privacy-policy",
+  "supportUrl": "https://standardpin.kr/contact",
+  "termsOfServiceUrl": "https://standardpin.kr/terms",
+  "repository": "https://github.com/Standardpin/pin-ai-plugin",
+  "documentationUrl": "https://github.com/Standardpin/pin-ai-plugin#readme",
   "keywords": [
     "clinic",
     "homepage",
